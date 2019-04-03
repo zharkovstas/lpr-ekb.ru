@@ -1,0 +1,61 @@
+html, body, .container {
+    height: 100%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+.title-logo {
+    padding: 20px 0 10px 0;
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.title-logo-img {
+    position: relative;
+    top: -3px;
+    left: -2px;
+    width: 32px;
+    height: 32px;
+}
+
+.title-motto-header {
+    font-size: 48px;
+    font-weight: 700;
+    padding: 10px 0 10px 0;
+}
+
+@media (min-width: 768px) {
+    .title-motto-header {
+        font-size: 64px;
+        font-weight: 700;
+        padding: 10px 0 10px 0;
+    }    
+}
+
+.title-motto-lead {
+    font-size: 26px;
+    font-weight: 400;
+}
+
+.contacts {
+    padding-top: 60px;
+}
+
+.contacts-header {
+    padding-top: 20px;
+}
+
+.contacts-img {
+    border-radius: 50%;
+    width: 196px;
+    height: 196px;
+}
