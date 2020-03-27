@@ -1,0 +1,152 @@
+html, body, .container {
+    height: 100%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+.title-logo {
+    padding: 20px 0 10px 0;
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.title-logo-img {
+    position: relative;
+    top: -3px;
+    left: -2px;
+    width: 32px;
+    height: 32px;
+}
+
+.title-logo-link, .title-logo-link:focus, .title-logo-link:hover, .title-logo-link:active {
+    text-decoration: none;
+    color: #000;
+}
+
+.title-motto-header {
+    font-size: 48px;
+    font-weight: 700;
+    padding: 10px 0 10px 0;
+}
+
+@media (min-width: 768px) {
+    .title-motto-header {
+        font-size: 64px;
+        font-weight: 700;
+        padding: 10px 0 10px 0;
+    }    
+}
+
+.title-motto-lead {
+    font-size: 26px;
+    font-weight: 400;
+}
+
+.contacts {
+    padding-top: 60px;
+}
+
+.contacts-header {
+    padding-top: 20px;
+}
+
+.contacts-img {
+    border-radius: 50%;
+    width: 196px;
+    height: 196px;
+}
+
+.news-block {
+    text-align: left;
+    margin: 30px 0;
+    padding: 20px;
+}
+
+.breadcrumbs {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    .news-block {
+        margin: 30px 100px;
+    } 
+}
+
+.news-index {
+    text-align: left;
+}
+
+.news-index-content {
+    font-size: 24px;
+    margin: 0px auto;
+}
+
+.news-index-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.news-index-header-title {
+    text-align: center;
+    font-size: 48px;
+    font-weight: 700;
+}
+
+@media (min-width: 768px) {
+    .news-index-content {
+        width: 768px;
+    } 
+}
+
+.news-page, .news-page-footer {
+    text-align: left;
+}
+
+.news-page-footer {
+    margin: 0px auto;
+}
+
+.news-page-content {
+    font-size: 24px;
+    margin: 0px auto;
+}
+
+.news-page-content-generated h1 {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+    .news-page-content,.news-page-footer {
+        width: 768px;
+    }
+    .news-page-content-generated h1 {
+        font-size: 48px;
+    }
+}
+
+.news-page-content-generated img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+.news-page-header-date {
+    font-size: 16px;
+    color: #999;
+}
+
+.news-page-lead {
+    font-weight: 400;
+}

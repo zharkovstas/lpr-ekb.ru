@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+{% include "logo.html" %}
+<section class="breadcrumbs">
+    <a href="/">Главная</a>
+</section>
+<section class="news-index">
+    <div class="news-index-content">
+
+        <div class="news-index-header">
+            <h1 class="news-index-header-title">Новости</h1>
+        </div>
+        <div>
+            {% for n in news %}
+            <p>
+                <div>{{ n.title }}</div>
+                <div><small>{{ n.date }}</small></div>
+            </p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
