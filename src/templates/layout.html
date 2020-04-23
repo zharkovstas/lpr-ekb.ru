@@ -2,6 +2,7 @@
 <html lang="ru">
 
 <head>
+    {% if release %}{% include "counters.html" %}{% endif %}
     <meta charset="utf-8">
     <title>{% if meta_title %}{{ meta_title }} — Либертарианцы Екатеринбурга{% else %}Либертарианцы Екатеринбурга{% endif %}</title>
     {% if meta_description %}<meta name="description" content="{{ meta_description }}" />{% endif %}
@@ -27,9 +28,6 @@
     <link rel="icon" type="image/png" href="/img/favicons/favicon-128.png" sizes="128x128" />
     <link href="/css/bootstrap-lite.min.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
-    {% if is_release %}
-    {% include "counters.html" %}
-    {% endif %}
 </head>
 
 <body>
