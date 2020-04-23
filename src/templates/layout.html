@@ -2,8 +2,8 @@
 <html lang="ru">
 
 <head>
-    {% if release %}{% include "counters.html" %}{% endif %}
     <meta charset="utf-8">
+    {% if release %}{% include "counters.html" %}{% endif %}
     <title>{% if meta_title %}{{ meta_title }} — Либертарианцы Екатеринбурга{% else %}Либертарианцы Екатеринбурга{% endif %}</title>
     {% if meta_description %}<meta name="description" content="{{ meta_description }}" />{% endif %}
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />

@@ -27,10 +27,11 @@ def find_news():
         title = find_title(text)
         cleaned_text = replace_title(
             text, remove_brackets(title)) if title else text
+        improved_text = improve_text(cleaned_text)
 
-        html = md.convert(cleaned_text)
+        html = md.convert(improved_text)
         date = md.Meta["date"]
-        news = News(path.parent, title, html, date)
+        news = News(path.parent, improve_text(title), html, date)
         news_list.append(news)
 
     return sorted(news_list, key=lambda x: x.date, reverse=True)
@@ -54,6 +55,19 @@ def replace_title(text, new_title):
 
 def remove_brackets(input):
     return re.sub(r'[\[\]]', '', input)
+
+
+def improve_text(text):
+    text = re.sub(r"(\s)-(\s)", "\u00A0—\g<2>", text)
+    text = add_nbsp(text)
+    text = add_nbsp(text)
+    text = add_nbsp(text)
+
+    return text
+
+
+def add_nbsp(text):
+    return re.sub(r"(\s(и|а|в|не|на|для|о|об|у|к|с|со|за)) ([a-zа-яё0-9])", "\g<1>\u00A0\g<3>", text, flags=re.IGNORECASE)
 
 
 if __name__ == "__main__":
