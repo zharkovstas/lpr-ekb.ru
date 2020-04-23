@@ -6,6 +6,7 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 from markupsafe import Markup
 from copytree import copytree
 from find_news import find_news
+from sitemap import Sitemap
 import datetime
 
 
@@ -32,6 +33,10 @@ def main(args):
         in news
     ]
 
+    sitemap = Sitemap("https://lpr-ekb.ru/")
+    sitemap.add_url("/")
+    sitemap.add_url("/news")
+
     news_template = env.get_template('news.html')
 
     for n in news:
@@ -43,6 +48,7 @@ def main(args):
              date=format_date(n.date),
              other_news=[on for on in news_items if n.path != on["path"]][:3])
          .dump(str(Path("../out") / n.path / "index.html")))
+        sitemap.add_url(n.path)
 
     (env
      .get_template('news-index.html')
@@ -56,6 +62,11 @@ def main(args):
          news=news_items[:3],
          meta_description="Выступаем за свободную экономику, независимое местное самоуправление, суверенитет личности и против цензуры в интернете. Присоединяйся!")
      .dump("../out/index.html"))
+
+    (env
+     .get_template('sitemap.xml')
+     .stream(urls=sitemap.urls)
+     .dump("../out/sitemap.xml"))
 
     copytree("./static", "../out")
 
