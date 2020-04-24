@@ -44,6 +44,7 @@ def main(args):
          .stream(
              release=is_release,
              meta_title=n.render_title(),
+             meta_description=n.description,
              content=Markup(n.html),
              date=format_date(n.date),
              other_news=[on for on in news_items if n.path != on["path"]][:3])
@@ -52,7 +53,11 @@ def main(args):
 
     (env
      .get_template('news-index.html')
-     .stream(release=is_release, news=news_items, meta_title="Новости")
+     .stream(
+         release=is_release,
+         news=news_items,
+         meta_title="Новости",
+         meta_description="Новости либертарианства и Либертарианской Партии России в Екатеринбурге и Свердловской области")
      .dump("../out/news/index.html"))
 
     (env

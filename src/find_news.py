@@ -5,11 +5,12 @@ import re
 
 
 class News:
-    def __init__(self, path, title, html, date):
+    def __init__(self, path, title, html, date, description):
         self.path = path
         self.title = title
         self.html = html
         self.date = date
+        self.description = description
 
     def render_title_link(self, url):
         return self.title.replace('[', f'<a href="{url}">').replace(']', '</a>') if "[" in self.title else f"<a href={url}>{self.title}</a>"
@@ -31,7 +32,7 @@ def find_news():
 
         html = md.convert(improved_text)
         date = md.Meta["date"]
-        news = News(path.parent, improve_text(title), html, date)
+        news = News(path.parent, improve_text(title), html, date, cut(remove_specials(improved_text), 150))
         news_list.append(news)
 
     return sorted(news_list, key=lambda x: x.date, reverse=True)
@@ -68,6 +69,27 @@ def improve_text(text):
 
 def add_nbsp(text):
     return re.sub(r"(\s(и|а|в|не|на|для|о|об|у|к|с|со|за)) ([a-zа-яё0-9])", "\g<1>\u00A0\g<3>", text, flags=re.IGNORECASE)
+
+
+def remove_specials(text):
+    dots_index = text.find("...")
+    text = text[dots_index:] if dots_index != -1 else text
+    text = re.sub(r"^.*?\.\.\.", "", text)
+    text = re.sub(r"^(#|!|\[).*$", "", text, flags=re.MULTILINE)
+    text = re.sub(r"[\[\]]", " ", text)
+    text = re.sub(r"\s{2,}", " ", text)
+    return text.strip()
+
+
+def cut(text, length):
+    if len(text) <= length:
+        return text
+    i = max(0, length - 4)
+    while i > 0 and text[i] != ' ':
+        i -= 1
+    if i == 0:
+        return f"{text[:length - 3]}..."
+    return f"{text[:i]} ..."
 
 
 if __name__ == "__main__":
