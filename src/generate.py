@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import sys
+import time
 from shutil import ignore_patterns
 from pathlib import Path
 from jinja2 import Environment, PackageLoader, select_autoescape
@@ -85,7 +86,7 @@ def main(args):
 def render_template(env, template_name, destination, **kwargs):
     (env
         .get_template(template_name)
-        .stream(**kwargs)
+        .stream(**kwargs, static_version=int(time.time()))
         .dump(destination))
 
 
