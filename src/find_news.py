@@ -68,7 +68,7 @@ def improve_text(text):
 
 
 def add_nbsp(text):
-    return re.sub(r"(\s(и|а|в|не|на|для|о|об|у|к|с|со|за)) ([a-zа-яё0-9])", "\g<1>\u00A0\g<3>", text, flags=re.IGNORECASE)
+    return re.sub(r"(\s(и|а|в|не|на|для|о|об|у|к|с|со|за|по)) ([a-zа-яё0-9])", "\g<1>\u00A0\g<3>", text, flags=re.IGNORECASE)
 
 
 def remove_specials(text):
