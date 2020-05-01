@@ -2,6 +2,7 @@
 from pathlib import Path
 import markdown
 import re
+from bs4 import BeautifulSoup
 
 
 class News:
@@ -31,8 +32,24 @@ def find_news():
         improved_text = improve_text(cleaned_text)
 
         html = md.convert(improved_text)
+
+        soup = BeautifulSoup(html, features="html.parser")
+        for img in soup.find_all("img"):
+            img['title'] = img['alt']
+            img['class'] = 'img-fluid news-page-content-media'
+        for iframe in soup.find_all("iframe"):
+            iframe['class'] = 'news-page-content-media'
+        for h1 in soup.find_all("h1"):
+            h1["class"] = "news-page-content-h1"
+        for a in soup.find_all("a"):
+            if not a["href"].startswith("/"):
+                a["target"] = "_blank"
+                a["rel"] = "noopener"
+        html = str(soup)
+
         date = md.Meta["date"]
-        news = News(str(path.parent).rstrip("/") + "/", improve_text(title), html, date, cut(remove_specials(improved_text), 150))
+        news = News(str(path.parent).rstrip("/") + "/", improve_text(title),
+                    html, date, cut(remove_specials(improved_text), 150))
         news_list.append(news)
 
     return sorted(news_list, key=lambda x: x.date, reverse=True)

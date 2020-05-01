@@ -128,7 +128,12 @@ body {
     margin: 0px auto;
 }
 
-.news-page-content-generated h1 {
+.news-page-content-media {
+    display: block;
+    margin: auto;
+}
+
+.news-page-content-h1 {
     text-align: center;
     font-weight: 700;
     margin-bottom: 20px;
@@ -138,21 +143,9 @@ body {
     .news-page-content,.news-page-footer {
         width: 768px;
     }
-    .news-page-content-generated h1 {
+    .news-page-content-h1 {
         font-size: 48px;
     }
-}
-
-.news-page-content-generated img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: auto;
-}
-
-.news-page-content-generated iframe {
-    display: block;
-    margin: auto;
 }
 
 .news-page-header-date {

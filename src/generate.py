@@ -11,6 +11,7 @@ import datetime
 
 BASE_URL = "https://lpr-ekb.ru/"
 
+
 def main(args):
     is_release = "release" in args
 
@@ -38,45 +39,54 @@ def main(args):
     sitemap.add_url("/")
     sitemap.add_url("/news/")
 
-    news_template = env.get_template('news.html')
-
     for n in news:
-        (news_template
-         .stream(
-             release=is_release,
-             meta_title=n.render_title(),
-             meta_description=n.description,
-             meta_canonical=f'{BASE_URL.rstrip("/")}/{n.path.strip("/")}/',
-             content=Markup(n.html),
-             date=format_date(n.date),
-             other_news=[on for on in news_items if n.path != on["path"]][:3])
-         .dump(str(Path("../out") / n.path / "index.html")))
+
+        render_template(
+            env,
+            "news.html",
+            f"../out/{n.path.strip('/')}/index.html",
+            release=is_release,
+            meta_title=n.render_title(),
+            meta_description=n.description,
+            meta_canonical=f'{BASE_URL.rstrip("/")}/{n.path.strip("/")}/',
+            content=Markup(n.html),
+            date=format_date(n.date),
+            other_news=[on for on in news_items if n.path != on["path"]][:3]
+        )
+
         sitemap.add_url(n.path)
 
-    (env
-     .get_template('news-index.html')
-     .stream(
-         release=is_release,
-         news=news_items,
-         meta_title="Новости",
-         meta_description="Новости либертарианства и Либертарианской Партии России в Екатеринбурге и Свердловской области",
-         meta_canonical=f'{BASE_URL.rstrip("/")}/news/')
-     .dump("../out/news/index.html"))
+    render_template(
+        env,
+        "news-index.html",
+        "../out/news/index.html",
+        release=is_release,
+        news=news_items,
+        meta_title="Новости",
+        meta_description="Новости либертарианства и Либертарианской Партии России в Екатеринбурге и Свердловской области",
+        meta_canonical=f'{BASE_URL.rstrip("/")}/news/'
+    )
 
-    (env
-     .get_template('home.html')
-     .stream(
-         release=is_release,
-         news=news_items[:3],
-         meta_description="Выступаем за свободную экономику, независимое местное самоуправление, суверенитет личности и против цензуры в интернете. Присоединяйся!")
-     .dump("../out/index.html"))
+    render_template(
+        env,
+        "home.html",
+        "../out/index.html",
+        release=is_release,
+        news=news_items[:3],
+        meta_description="""Выступаем за свободную экономику, независимое местное самоуправление,
+суверенитет личности и против цензуры в интернете. Присоединяйся!""")
 
-    (env
-     .get_template('sitemap.xml')
-     .stream(urls=sitemap.urls)
-     .dump("../out/sitemap.xml"))
+    render_template(env, "sitemap.xml",
+                    "../out/sitemap.xml", urls=sitemap.urls)
 
     copytree("./static", "../out")
+
+
+def render_template(env, template_name, destination, **kwargs):
+    (env
+        .get_template(template_name)
+        .stream(**kwargs)
+        .dump(destination))
 
 
 months = ["января", "февраля", "марта", "апреля", "мая", "июня",
