@@ -32,7 +32,7 @@ def find_news():
 
         html = md.convert(improved_text)
         date = md.Meta["date"]
-        news = News(path.parent, improve_text(title), html, date, cut(remove_specials(improved_text), 150))
+        news = News(str(path.parent).rstrip("/") + "/", improve_text(title), html, date, cut(remove_specials(improved_text), 150))
         news_list.append(news)
 
     return sorted(news_list, key=lambda x: x.date, reverse=True)

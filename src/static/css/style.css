@@ -111,6 +111,10 @@ body {
     } 
 }
 
+.news-index-item {
+    margin-bottom: 1rem;
+}
+
 .news-page, .news-page-footer {
     text-align: left;
 }
@@ -158,4 +162,8 @@ body {
 
 .news-page-lead {
     font-weight: 400;
+}
+
+.news-page-other-news-item {
+    margin-bottom: 1rem;
 }

@@ -9,6 +9,7 @@ from find_news import find_news
 from sitemap import Sitemap
 import datetime
 
+BASE_URL = "https://lpr-ekb.ru/"
 
 def main(args):
     is_release = "release" in args
@@ -25,7 +26,7 @@ def main(args):
 
     news_items = [
         {
-            "title": Markup(n.render_title_link(Path("/") / n.path)),
+            "title": Markup(n.render_title_link("/" + n.path.strip("/") + "/")),
             "date": format_date(n.date),
             "path": n.path
         }
@@ -33,9 +34,9 @@ def main(args):
         in news
     ]
 
-    sitemap = Sitemap("https://lpr-ekb.ru/")
+    sitemap = Sitemap(BASE_URL)
     sitemap.add_url("/")
-    sitemap.add_url("/news")
+    sitemap.add_url("/news/")
 
     news_template = env.get_template('news.html')
 
@@ -45,6 +46,7 @@ def main(args):
              release=is_release,
              meta_title=n.render_title(),
              meta_description=n.description,
+             meta_canonical=f'{BASE_URL.rstrip("/")}/{n.path.strip("/")}/',
              content=Markup(n.html),
              date=format_date(n.date),
              other_news=[on for on in news_items if n.path != on["path"]][:3])
@@ -57,7 +59,8 @@ def main(args):
          release=is_release,
          news=news_items,
          meta_title="Новости",
-         meta_description="Новости либертарианства и Либертарианской Партии России в Екатеринбурге и Свердловской области")
+         meta_description="Новости либертарианства и Либертарианской Партии России в Екатеринбурге и Свердловской области",
+         meta_canonical=f'{BASE_URL.rstrip("/")}/news/')
      .dump("../out/news/index.html"))
 
     (env

@@ -7,6 +7,7 @@
     <title>{% if meta_title %}{{ meta_title }} — Либертарианцы Екатеринбурга{% else %}Либертарианцы Екатеринбурга{% endif %}</title>
     {% if meta_description %}<meta name="description" content="{{ meta_description }}" />{% endif %}
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    {% if meta_canonical %}<link rel="canonical" href="{{ meta_canonical }}" />{% endif %}
     <meta property="og:site_name" content="Либертарианцы Екатеринбурга" />
     <meta property="og:title" content="{% if meta_title %}{{ meta_title }} — Либертарианцы Екатеринбурга{% else %}Либертарианцы Екатеринбурга{% endif %}" />
     <meta property="og:type" content="website" />
