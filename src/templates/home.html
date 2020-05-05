@@ -2,16 +2,18 @@
 {% block title %}Новости — Либертарианцы Екатеринбурга{% endblock %}
 {% block content %}
 <section class="title">
-    <h1 class="title-logo">
-        <img class="title-logo-img" src="/img/logo.png" />
-        Либертарианцы Екатеринбурга
-    </h1>
+    <div class="h1 title-logo">
+        <a class="title-logo-link" href="/">
+            <img class="title-logo-img" src="/img/logo.png" />
+            Либертарианцы Екатеринбурга
+        </a>
+    </div>
     <div class="title-motto">
         <div class="title-motto-header">Присоединяйся к&nbsp;сторонникам свободы на&nbsp;Урале</div>
 
         <div class="title-motto-lead">
-            Мы&nbsp;&mdash; активисты Либертарианской Партии России в&nbsp;Екатеринбурге и&nbsp;Свердловской&nbsp;области. Выступаем за&nbsp;свободную экономику, независимое местное самоуправление, суверенитет личности и против
-            цензуры в интернете.<br />Верим в&nbsp;тебя, а&nbsp;не&nbsp;в&nbsp;государство!
+            Мы&nbsp;&mdash; активисты Либертарианской Партии России в&nbsp;Екатеринбурге и&nbsp;Свердловской&nbsp;области. Выступаем за&nbsp;свободную экономику, независимое местное самоуправление, суверенитет личности и&nbsp;против
+            цензуры в&nbsp;интернете.<br />Верим в&nbsp;тебя, а&nbsp;не&nbsp;в&nbsp;государство!
         </div>
     </div>
 </section>
@@ -37,8 +39,12 @@
 </section>
 
 <section class="news-block">
-    <h2>Последние новости</h2>
-    <div class="row">
+    <div class="d-flex justify-content-between">
+        <h2>Последние новости</h2>
+        <div class="news-block-all-link"><a href="/news/">Все новости</a></div>
+    </div>
+    <hr class="divider-muted news-block-header-divider">
+    <div class="row news-block-items">
         {% for n in news %}
         <div class="col-md-4">
             <div>{{ n.title }}</div>
@@ -46,7 +52,6 @@
         </div>
         {% endfor %}
     </div>
-    <div class="news-block-all-link"><a href="/news/">Все новости</a></div>
 </section>
 
 <section class="share">

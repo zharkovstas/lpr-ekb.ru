@@ -9,14 +9,17 @@
         <div class="news-page-content-generated">
             {{ content }}
         </div>
-        <p><small>{{ date }}</small></p>
-        <p><span class="ya-share2" data-services="vkontakte,facebook,twitter"></span></p>
+        <div class="d-flex justify-content-between">
+            <p><small>{{ date }}</small></p>
+            <p>
+                <span class="ya-share2" data-services="vkontakte,facebook,twitter"></span>
+            </p>
+        </div>
     </div>
 </section>
 <section class="news-page-footer">
-
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 news-page-footer-items">
             <h3>Другие новости</h3>
 
             {% for n in other_news %}
@@ -28,10 +31,9 @@
 
             <div><a href="/news/">Все новости</a></div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 news-page-footer-items">
             {% include "how-to-help.html" %}
         </div>
     </div>
-
 </section>
 {% endblock %}
