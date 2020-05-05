@@ -1,9 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
 {% include "logo.html" %}
-<section class="breadcrumbs">
-    <a href="/">Главная</a>
-</section>
 <section class="news-index">
     <div class="news-index-content">
 
@@ -14,7 +11,8 @@
             {% for n in news %}
             <div class="news-index-item">
                 <div>{{ n.title }}</div>
-                <div><small>{{ n.date }}</small></div>
+                <hr class="divider-muted news-index-item-divider">
+                <small class="news-page-header-date">{{ n.date }}</small>
             </div>
             {% endfor %}
         </div>

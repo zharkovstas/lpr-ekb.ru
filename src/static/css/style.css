@@ -72,7 +72,7 @@ footer {
 .news-block {
     text-align: left;
     margin: 30px 0 0 0;
-    padding: 20px;
+    padding: 30px 15px 30px 15px;
 }
 
 .news-block-all-link {
@@ -83,19 +83,13 @@ footer {
     font-size: 14px;
 }
 
-@media (min-width: 768px) {
-    .news-block {
-        margin: 30px 100px 0 100px;
-    } 
-}
-
 .news-index {
     text-align: left;
 }
 
 .news-index-content {
     font-size: 24px;
-    margin: 0px auto;
+    margin: 0 auto;
 }
 
 .news-index-header {
@@ -116,7 +110,7 @@ footer {
 }
 
 .news-index-item {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 }
 
 .news-page, .news-page-footer {
@@ -124,12 +118,12 @@ footer {
 }
 
 .news-page-footer {
-    margin: 0px auto;
+    margin: 0 auto;
 }
 
 .news-page-content {
     font-size: 24px;
-    margin: 0px auto;
+    margin: 0 auto;
 }
 
 .news-page-content-media {
@@ -163,4 +157,37 @@ footer {
 
 .news-page-other-news-item {
     margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .news-page-footer-items:not(:last-child) {
+        margin-bottom: 1rem;
+    }
+}
+
+.news-page-how-to-help-header > div:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+.news-index-item-divider {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.news-block-header-divider {
+    margin-block-start: 0;
+}
+
+@media (max-width: 768px) {
+    .news-block-items > div:not(:last-child) {
+        margin-bottom: 1rem;
+    }
+}
+
+.divider-muted {
+    border-top: 1px solid #c3ccd5;
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 0;
+    border-width: 1px;
 }
