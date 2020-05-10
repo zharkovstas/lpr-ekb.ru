@@ -30,13 +30,7 @@ jobs:
         run: python generate.py
         working-directory: ./src
 
-      - name: Deploy to Server
-        uses: easingthemes/ssh-deploy@v2.1.1
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.KEY }}
-          ARGS: "-rltgoDzvO --delete"
-          SOURCE: "out/"
-          REMOTE_HOST: ${{ secrets.HOST }}
-          REMOTE_USER: ${{ secrets.USERNAME }}
-          REMOTE_PORT: ${{ secrets.PORT }}
-          TARGET: "/C:/www/lpr-ekb/"
+- name: Deploy to Server
+  run: |
+    echo ${{ secrets.KEY }} > deployer_id_rsa
+    scp -i deployer_id_rsa ./out/ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/C:/www/lpr-ekb/
