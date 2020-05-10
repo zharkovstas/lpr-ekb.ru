@@ -33,4 +33,5 @@ jobs:
       - name: Deploy to Server
         run: |
           echo "${{ secrets.KEY }}" > deployer_id_rsa
+          ssh-keygen -R ${{ secrets.HOST }}
           scp -i deployer_id_rsa -P ${{ secrets.PORT }} ./out/ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/C:/www/lpr-ekb/
