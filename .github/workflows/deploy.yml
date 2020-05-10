@@ -33,4 +33,8 @@ jobs:
       - name: Deploy to Server
         run: |
           echo ${{ secrets.KEY }} > deployer_id_rsa
-          scp -i deployer_id_rsa ./out/ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/C:/www/lpr-ekb/
+          sudo apt-get update
+          sudo apt-get upgrade
+          sudo apt-get install openssh-client
+          sudo systemctl start ssh
+          scp -i deployer_id_rsa -P ${{ secrets.PORT }} ./out/ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/C:/www/lpr-ekb/
