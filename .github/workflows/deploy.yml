@@ -31,12 +31,12 @@ jobs:
         working-directory: ./src
 
       - name: Deploy to Server
-          uses: easingthemes/ssh-deploy@v2.1.1
-          env:
-            SSH_PRIVATE_KEY: ${{ secrets.KEY }}
-            ARGS: "-rltgoDzvO --delete"
-            SOURCE: "out/"
-            REMOTE_HOST: ${{ secrets.HOST }}
-            REMOTE_USER: ${{ secrets.USERNAME }}
-            REMOTE_PORT: ${{ secrets.PORT }}
-            TARGET: "/C:/www/lpr-ekb/"
+        uses: easingthemes/ssh-deploy@v2.1.1
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.KEY }}
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "out/"
+          REMOTE_HOST: ${{ secrets.HOST }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
+          REMOTE_PORT: ${{ secrets.PORT }}
+          TARGET: "/C:/www/lpr-ekb/"
