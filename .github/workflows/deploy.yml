@@ -37,5 +37,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.KEY }}
-          source: "out"
+          source: "out/*"
           target: "/C:/www/lpr-ekb/"
+          rm: 1
