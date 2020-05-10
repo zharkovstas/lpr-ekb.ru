@@ -34,4 +34,4 @@ jobs:
         run: |
           echo "${{ secrets.KEY }}" > deployer_id_rsa
           chmod 400 deployer_id_rsa
-          scp -i deployer_id_rsa -o StrictHostKeyChecking=no -P ${{ secrets.PORT }} ./out/ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/C:/www/lpr-ekb/
+          scp -r -i deployer_id_rsa -o StrictHostKeyChecking=no -P ${{ secrets.PORT }} ./out/* ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/C:/www/lpr-ekb/
