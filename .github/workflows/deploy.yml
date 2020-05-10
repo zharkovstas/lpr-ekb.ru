@@ -30,7 +30,7 @@ jobs:
         run: python generate.py
         working-directory: ./src
 
-- name: Deploy to Server
-  run: |
-    echo ${{ secrets.KEY }} > deployer_id_rsa
-    scp -i deployer_id_rsa ./out/ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/C:/www/lpr-ekb/
+      - name: Deploy to Server
+        run: |
+          echo ${{ secrets.KEY }} > deployer_id_rsa
+          scp -i deployer_id_rsa ./out/ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/C:/www/lpr-ekb/
