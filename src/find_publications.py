@@ -111,7 +111,7 @@ def remove_specials(text):
     dots_index = text.find("...")
     text = text[dots_index:] if dots_index != -1 else text
     text = re.sub(r"^.*?\.\.\.", "", text)
-    text = re.sub(r"^([#!\[]).*$", "", text, flags=re.MULTILINE)
+    text = re.sub(r"^([#!\[\<]).*$", "", text, flags=re.MULTILINE)
     text = re.sub(r"[\[\]]", " ", text)
     text = re.sub(r"\s{2,}", " ", text)
     return text.strip()
