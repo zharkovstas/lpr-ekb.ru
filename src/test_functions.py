@@ -2,7 +2,7 @@ from typing import Tuple
 
 import pytest
 
-from find_news import add_nbsp
+from find_publications import add_nbsp
 
 
 @pytest.mark.parametrize(
