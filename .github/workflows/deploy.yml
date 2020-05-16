@@ -32,7 +32,7 @@ jobs:
 
       - name: Deploy to Server
         run: |
-          zip -r release.zip
+          zip -r release.zip .
           echo "${{ secrets.KEY }}" > deployer_id_rsa
           chmod 400 deployer_id_rsa
           scp -v -i deployer_id_rsa -o StrictHostKeyChecking=no -P ${{ secrets.PORT }} ./releaze.zip ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/C:/temp/lpr-releases
