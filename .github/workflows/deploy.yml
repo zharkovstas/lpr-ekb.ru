@@ -27,7 +27,7 @@ jobs:
         working-directory: ./src
 
       - name: Generate static
-        run: python generate.py
+        run: python generate.py release
         working-directory: ./src
 
       - name: Deploy to Server
