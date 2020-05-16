@@ -35,6 +35,6 @@ jobs:
           zip -r release.zip .
           echo "${{ secrets.KEY }}" > deployer_id_rsa
           chmod 400 deployer_id_rsa
-          scp -v -i deployer_id_rsa -o StrictHostKeyChecking=no -P ${{ secrets.PORT }} ./releaze.zip ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/C:/temp/lpr-releases
+          scp -v -i deployer_id_rsa -o StrictHostKeyChecking=no -P ${{ secrets.PORT }} ./release.zip ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/C:/temp/lpr-releases
           ssh -v -i deployer_id_rsa -o StrictHostKeyChecking=no -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "7za x -aoa -oC:\temp\lpr-releases\release C:\temp\lpr-releases\release.zip && robocopy C:\temp\lpr-releases\release C:\www\lpr-ekb /maxage:1"
         working-directory: ./out
