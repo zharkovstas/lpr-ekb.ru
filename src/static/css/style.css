@@ -113,6 +113,11 @@ footer {
     margin-bottom: 2rem;
 }
 
+.news-index-item-divider {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
 .news-page, .news-page-footer {
     text-align: left;
 }
@@ -151,10 +156,6 @@ footer {
     color: #999;
 }
 
-.news-page-lead {
-    font-weight: 400;
-}
-
 .news-page-other-news-item {
     margin-bottom: 1rem;
 }
@@ -167,11 +168,6 @@ footer {
 
 .news-page-how-to-help-header > div:not(:last-child) {
     margin-bottom: 1rem;
-}
-
-.news-index-item-divider {
-    margin-block-start: 0;
-    margin-block-end: 0;
 }
 
 .news-block-header-divider {
@@ -190,4 +186,54 @@ footer {
     border-left: 0;
     border-right: 0;
     border-width: 1px;
+}
+
+.article, .article-footer {
+    text-align: left;
+}
+
+.article-footer {
+    margin: 0 auto;
+}
+
+.article-content {
+    margin: 0 auto;
+}
+
+.article-content-media {
+    display: block;
+    margin: auto;
+}
+
+.article-content-h1 {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+    .article-content,.article-footer {
+        width: 768px;
+    }
+    .article-content-h1 {
+        font-size: 48px;
+    }
+}
+
+.article-lead {
+    font-size: 24px;
+}
+
+.article-news-item {
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .article-footer-items:not(:last-child) {
+        margin-bottom: 1rem;
+    }
+}
+
+.article-how-to-help-header > div:not(:last-child) {
+    margin-bottom: 1rem;
 }

@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block content %}
+{% include "logo.html" %}
+<section class="breadcrumbs">
+    <a href="/">Главная</a>
+</section>
+<section class="article">
+    <div class="article-content">
+        <div class="article-content-generated">
+            {{ content }}
+        </div>
+        <p>
+            <span class="ya-share2" data-services="vkontakte,facebook,twitter"></span>
+        </p>
+    </div>
+</section>
+<section class="article-footer">
+    <div class="row">
+        <div class="col-md-6 article-footer-items">
+            <h3>Последние новости</h3>
+
+            {% for n in news %}
+            <div class="article-news-item">
+                <div>{{ n.title }}</div>
+                <div><small>{{ n.date }}</small></div>
+            </div>
+            {% endfor %}
+
+            <div><a href="/news/">Все новости</a></div>
+        </div>
+        <div class="col-md-6 article-footer-items">
+            {% include "how-to-help.html" %}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -9,7 +9,7 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 from markupsafe import Markup
 
 from copytree import copytree
-from find_news import find_news
+from find_publications import find_publications
 from sitemap import Sitemap
 
 BASE_URL = "https://lpr-ekb.ru/"
@@ -17,11 +17,14 @@ BASE_URL = "https://lpr-ekb.ru/"
 
 def main(args):
     is_release = "release" in args
-
+    
     Path("../out/news").mkdir(parents=True, exist_ok=True)
+    Path("../out/articles").mkdir(parents=True, exist_ok=True)
     copytree("./news", "../out/news", ignore=ignore_patterns("*.md"))
+    copytree("./articles", "../out/articles", ignore=ignore_patterns("*.md"))
 
-    news_list = find_news()
+    news_list = find_publications("./news")
+    article_list = find_publications("./articles")
 
     env = Environment(
         loader=PackageLoader("generate", "./templates"),
@@ -56,6 +59,21 @@ def main(args):
         )
 
         sitemap.add_url(news.path)
+    
+    for article in article_list:
+        render_template(
+            env,
+            "article.html",
+            f"../out/{article.path.strip('/')}/index.html",
+            release=is_release,
+            meta_title=article.render_title(),
+            meta_description=article.description,
+            meta_canonical=f'{BASE_URL.rstrip("/")}/{article.path.strip("/")}/',
+            content=Markup(article.html),
+            news=news_items[:3]
+        )
+
+        sitemap.add_url(article.path)
 
     render_template(
         env,

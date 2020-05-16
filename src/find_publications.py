@@ -25,10 +25,10 @@ class News:
         return remove_brackets(self.title)
 
 
-def find_news():
+def find_publications(path):
     news_list = []
 
-    for path in Path("./news").rglob("*.md"):
+    for path in Path(path).rglob("*.md"):
         md = markdown.Markdown(extensions=["full_yaml_metadata"])
 
         text = read_all_text(path)
@@ -50,13 +50,13 @@ def find_news():
             h1["class"] = "news-page-content-h1"
 
         for a in soup.find_all("a"):
-            if not a["href"].startswith("/"):
+            if a["href"].startswith("http"):
                 a["target"] = "_blank"
                 a["rel"] = "noopener"
 
         html = str(soup)
 
-        date = md.Meta["date"]
+        date = md.Meta["date"] if md.Meta else None
         news = News(
             str(path.parent).rstrip("/") + "/",
             improve_text(title),
@@ -132,4 +132,4 @@ def cut(text, length):
 
 
 if __name__ == "__main__":
-    find_news()
+    find_publications()
