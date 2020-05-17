@@ -1,5 +1,6 @@
 ---
 title: internet
+url: internet
 ---
 # Интернет без цензуры
 
