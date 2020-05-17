@@ -1,3 +1,6 @@
+---
+title: internet
+---
 # Интернет без цензуры
 
 ![Набережная городского пруда](/img/uploads/articles-internet-city.jpg)
