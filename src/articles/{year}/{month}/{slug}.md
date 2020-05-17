@@ -1,0 +1,4 @@
+---
+title: privet
+content: Тестовая
+---
