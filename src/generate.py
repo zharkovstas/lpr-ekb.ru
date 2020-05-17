@@ -106,6 +106,7 @@ def main(args):
 
 
 def render_template(env, template_name, destination, **kwargs):
+    Path(destination).parent.mkdir(parents=True, exist_ok=True)
     env.get_template(template_name).stream(
         **kwargs, static_version=int(time.time())
     ).dump(destination)

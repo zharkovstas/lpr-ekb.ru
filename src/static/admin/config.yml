@@ -1,0 +1,15 @@
+backend:
+  name: github
+  repo: zharkovstas/lpr-ekb.ru
+  branch: admin-test
+media_folder: src/static/img
+public_folder: /img/uploads
+collections:
+  - name: articles
+    label: Статьи
+    folder: src/articles
+    slug: "{{slug}}--index"
+    create: true
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Content, name: content, widget: markdown }

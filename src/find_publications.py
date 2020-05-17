@@ -58,7 +58,7 @@ def find_publications(path):
 
         date = md.Meta["date"] if md.Meta else None
         news = News(
-            str(path.parent).rstrip("/") + "/",
+            str(Path(str(path).replace("--", "/")).parent).rstrip("/") + "/",
             improve_text(title),
             html,
             date,
