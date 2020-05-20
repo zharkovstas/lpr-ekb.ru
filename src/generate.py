@@ -59,7 +59,9 @@ def main(args):
         )
 
         sitemap.add_url(news.path)
-    
+
+    sitemap.add_url("/articles/")
+
     for article in article_list:
         render_template(
             env,
@@ -86,6 +88,18 @@ def main(args):
             "Новости либертарианства и Либертарианской Партии России в Екатеринбурге и Свердловской области"
         ),
         meta_canonical=f'{BASE_URL.rstrip("/")}/news/',
+    )
+
+    render_template(
+        env,
+        "article-index.html",
+        "../out/articles/index.html",
+        release=is_release,
+        meta_title="Статьи",
+        meta_description=(
+            "Статьи про либертарианство и политику в Екатеринбурге и Свердловской области"
+        ),
+        meta_canonical=f'{BASE_URL.rstrip("/")}/articles/',
     )
 
     render_template(

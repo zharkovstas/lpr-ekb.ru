@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+{% include "logo.html" %}
+<section class="breadcrumbs">
+    <a href="/">Главная</a>
+</section>
+<section class="article-index">
+    <div class="article-index-content">
+
+        <div class="article-index-header">
+            <h1 class="article-index-header-title">Статьи</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Программа</h2>
+                <a href="/articles/internet">Интернет без цензуры</a>
+            </div>
+            <div class="col-md-6">
+                <h2>Гайды</h2>
+                Как провести митинг
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
