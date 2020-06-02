@@ -2,15 +2,9 @@
 import os
 import shutil
 import stat
-from typing import Callable, List, Optional, Set
 
 
-def copytree(
-    src: str,
-    dst: str,
-    symlinks: bool = False,
-    ignore: Optional[Callable[[str, List[str]], Set[str]]] = None,
-):
+def copytree(src, dst, symlinks=False, ignore=None):
     if not os.path.exists(dst):
         os.makedirs(dst)
         shutil.copystat(src, dst)

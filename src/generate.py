@@ -1,41 +1,29 @@
 #!/usr/bin/env python3
-import datetime
 import sys
-import time
-from pathlib import Path
 from shutil import ignore_patterns
-
-from jinja2 import Environment, PackageLoader, select_autoescape
-from markupsafe import Markup
-
-from copytree import copytree
-from find_publications import find_publications
-from sitemap import Sitemap
+from tools import ensure_directory, copy_tree, TemplateRenderer, format_date, Sitemap, read_pages
 
 BASE_URL = "https://lpr-ekb.ru/"
 
 
 def main(args):
     is_release = "release" in args
-    
-    Path("../out/news").mkdir(parents=True, exist_ok=True)
-    Path("../out/articles").mkdir(parents=True, exist_ok=True)
-    copytree("./news", "../out/news", ignore=ignore_patterns("*.md"))
-    copytree("./articles", "../out/articles", ignore=ignore_patterns("*.md"))
 
-    news_list = find_publications("./news")
-    article_list = find_publications("./articles")
+    ensure_directory("../out/news")
+    ensure_directory("../out/articles")
+    copy_tree("./news", "../out/news", ignore=ignore_patterns("*.md"))
+    copy_tree("./articles", "../out/articles", ignore=ignore_patterns("*.md"))
 
-    env = Environment(
-        loader=PackageLoader("generate", "./templates"),
-        autoescape=select_autoescape(["html", "xml"]),
-    )
+    news_list = read_pages("./news")
+    article_list = read_pages("./articles")
+
+    renderer = TemplateRenderer("./templates")
 
     news_items = [
         {
-            "title": Markup(news.render_title_link("/" + news.path.strip("/") + "/")),
+            "title": news.title_link_html,
             "date": format_date(news.date),
-            "path": news.path,
+            "url": news.url,
         }
         for news in news_list
     ]
@@ -45,40 +33,38 @@ def main(args):
     sitemap.add_url("/news/")
 
     for news in news_list:
-        render_template(
-            env,
+        renderer.render(
             "news.html",
-            f"../out/{news.path.strip('/')}/index.html",
+            f"../out/{news.url.strip('/')}/index.html",
             release=is_release,
-            meta_title=news.render_title(),
+            meta_title=news.title,
             meta_description=news.description,
-            meta_canonical=f'{BASE_URL.rstrip("/")}/{news.path.strip("/")}/',
-            content=Markup(news.html),
+            meta_canonical=f'{BASE_URL.rstrip("/")}/{news.url.strip("/")}/',
+            content=news.html,
             date=format_date(news.date),
-            other_news=[on for on in news_items if news.path != on["path"]][:3],
+            other_news=[
+                on for on in news_items if news.url != on["url"]][:3],
         )
 
-        sitemap.add_url(news.path)
+        sitemap.add_url(news.url)
 
     sitemap.add_url("/articles/")
 
     for article in article_list:
-        render_template(
-            env,
+        renderer.render(
             "article.html",
-            f"../out/{article.path.strip('/')}/index.html",
+            f"../out/{article.url.strip('/')}/index.html",
             release=is_release,
-            meta_title=article.render_title(),
+            meta_title=article.title,
             meta_description=article.description,
-            meta_canonical=f'{BASE_URL.rstrip("/")}/{article.path.strip("/")}/',
-            content=Markup(article.html),
+            meta_canonical=f'{BASE_URL.rstrip("/")}/{article.url.strip("/")}/',
+            content=article.html,
             news=news_items[:3]
         )
 
-        sitemap.add_url(article.path)
+        sitemap.add_url(article.url)
 
-    render_template(
-        env,
+    renderer.render(
         "news-index.html",
         "../out/news/index.html",
         release=is_release,
@@ -90,8 +76,7 @@ def main(args):
         meta_canonical=f'{BASE_URL.rstrip("/")}/news/',
     )
 
-    render_template(
-        env,
+    renderer.render(
         "article-index.html",
         "../out/articles/index.html",
         release=is_release,
@@ -102,8 +87,7 @@ def main(args):
         meta_canonical=f'{BASE_URL.rstrip("/")}/articles/',
     )
 
-    render_template(
-        env,
+    renderer.render(
         "home.html",
         "../out/index.html",
         release=is_release,
@@ -114,39 +98,9 @@ def main(args):
         ),
     )
 
-    render_template(env, "sitemap.xml", "../out/sitemap.xml", urls=sitemap.urls)
+    renderer.render("sitemap.xml", "../out/sitemap.xml", urls=sitemap.urls)
 
-    copytree("./static", "../out")
-
-
-def render_template(env, template_name, destination, **kwargs):
-    env.get_template(template_name).stream(
-        **kwargs, static_version=int(time.time())
-    ).dump(destination)
-
-
-months = [
-    "января",
-    "февраля",
-    "марта",
-    "апреля",
-    "мая",
-    "июня",
-    "июля",
-    "августа",
-    "сентября",
-    "октября",
-    "ноября",
-    "декабря",
-]
-
-
-def format_date(date):
-    result = [str(date.day), months[date.month - 1]]
-    if datetime.date.today().year > date.year:
-        result.append(str(date.year))
-
-    return " ".join(result)
+    copy_tree("./static", "../out")
 
 
 if __name__ == "__main__":

@@ -9,7 +9,8 @@ class Sitemap:
     def add_url(self, relative_url):
         self.urls.append(
             Url(
-                "/".join([self.base_url.rstrip("/"), str(relative_url).lstrip("/")]),
+                "/".join([self.base_url.rstrip("/"),
+                          str(relative_url).lstrip("/")]),
                 f"{datetime.today():%Y-%m-%d}",
             )
         )
