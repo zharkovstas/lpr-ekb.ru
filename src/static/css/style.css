@@ -37,9 +37,15 @@ footer {
 }
 
 .title-motto-header {
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 700;
     padding: 10px 0 10px 0;
+    line-height: 1.25;
+}
+
+.title-motto-lead {
+    font-size: 20px;
+    font-weight: 400;
 }
 
 @media (min-width: 768px) {
@@ -47,12 +53,11 @@ footer {
         font-size: 64px;
         font-weight: 700;
         padding: 10px 0 10px 0;
-    }    
-}
-
-.title-motto-lead {
-    font-size: 26px;
-    font-weight: 400;
+    }
+    .title-motto-lead {
+        font-size: 26px;
+        font-weight: 400;
+    }
 }
 
 .contacts {
@@ -127,7 +132,7 @@ footer {
 }
 
 .news-page-content {
-    font-size: 24px;
+    font-size: 16px;
     margin: 0 auto;
 }
 
@@ -140,11 +145,15 @@ footer {
     text-align: center;
     font-weight: 700;
     margin-bottom: 20px;
+    font-size: 28px;
 }
 
 @media (min-width: 768px) {
     .news-page-content,.news-page-footer {
         width: 768px;
+    }
+    .news-page-content {
+        font-size: 18px;
     }
     .news-page-content-h1 {
         font-size: 48px;
@@ -221,7 +230,7 @@ footer {
 }
 
 .article-lead {
-    font-size: 24px;
+    font-size: 18px;
 }
 
 .article-news-item {
