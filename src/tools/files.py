@@ -3,7 +3,7 @@ from tools.copytree import copytree
 
 
 def ensure_directory(path):
-    Path("../out/news").mkdir(parents=True, exist_ok=True)
+    Path(path).mkdir(parents=True, exist_ok=True)
 
 
 def copy_tree(src, dst, symlinks=False, ignore=None):

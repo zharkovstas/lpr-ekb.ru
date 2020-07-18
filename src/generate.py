@@ -2,6 +2,7 @@
 import sys
 from shutil import ignore_patterns
 from tools import ensure_directory, copy_tree, TemplateRenderer, format_date, Sitemap, read_pages
+from bs4 import BeautifulSoup
 
 BASE_URL = "https://lpr-ekb.ru/"
 
@@ -14,8 +15,8 @@ def main(args):
     copy_tree("./news", "../out/news", ignore=ignore_patterns("*.md"))
     copy_tree("./articles", "../out/articles", ignore=ignore_patterns("*.md"))
 
-    news_list = read_pages("./news")
-    article_list = read_pages("./articles")
+    news_list = read_pages("./news", process_html=process_html)
+    article_list = read_pages("./articles", process_html=process_html)
 
     renderer = TemplateRenderer("./templates")
 
@@ -101,6 +102,27 @@ def main(args):
     renderer.render("sitemap.xml", "../out/sitemap.xml", urls=sitemap.urls)
 
     copy_tree("./static", "../out")
+
+
+def process_html(html):
+    soup = BeautifulSoup(html, features="html.parser")
+
+    for img in soup.find_all("img"):
+        img["title"] = img["alt"]
+        img["class"] = "img-fluid news-page-content-media"
+
+    for iframe in soup.find_all("iframe"):
+        iframe["class"] = "news-page-content-media"
+
+    for h1 in soup.find_all("h1"):
+        h1["class"] = "news-page-content-h1"
+
+    for a in soup.find_all("a"):
+        if a["href"].startswith("http"):
+            a["target"] = "_blank"
+            a["rel"] = "noopener"
+
+    return str(soup)
 
 
 if __name__ == "__main__":
