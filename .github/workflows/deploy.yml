@@ -34,9 +34,9 @@ jobs:
         run: |
           SITE_ID="${{ secrets.SITE_ID }}"
           RELEASE_ID=`date '+%s'`
-          tar cvzf "$SITE_ID-$RELEASE_ID.tar.gz" --exclude="./$SITE_ID-$RELEASE_ID.tar.gz" .
+          tar cvzf "../$SITE_ID-$RELEASE_ID.tar.gz" .
           echo "${{ secrets.KEY }}" > deployer_id_rsa
           chmod 400 deployer_id_rsa
-          scp -v -i deployer_id_rsa -o StrictHostKeyChecking=no -P ${{ secrets.PORT }} "./$SITE_ID-$RELEASE_ID.tar.gz" ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~/releases/
+          scp -v -i deployer_id_rsa -o StrictHostKeyChecking=no -P ${{ secrets.PORT }} "../$SITE_ID-$RELEASE_ID.tar.gz" ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~/releases/
           ssh -v -i deployer_id_rsa -o StrictHostKeyChecking=no -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "mkdir ~/releases/$SITE_ID-$RELEASE_ID && tar xvf ~/releases/$SITE_ID-$RELEASE_ID.tar.gz -C ~/releases/$SITE_ID-$RELEASE_ID && cp -ru ~/releases/$SITE_ID-$RELEASE_ID ~/www/$SITE_ID && rm -r ~/releases/$SITE_ID-$RELEASE_ID"
         working-directory: ./out
