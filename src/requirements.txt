@@ -1,8 +1,8 @@
-beautifulsoup4==4.9.0
-Jinja2==2.11.3
-Markdown==3.2.1
-markdown-full-yaml-metadata==2.0.1
-MarkupSafe==1.1.1
-PyYAML==5.4
-soupsieve==2.0
-pytest==5.4.1
+beautifulsoup4==4.12.3
+Jinja2==3.1.4
+Markdown==3.7
+markdown-full-yaml-metadata==2.2.1
+MarkupSafe==2.1.5
+PyYAML==6.0.2
+soupsieve==2.6
+pytest==8.3.2
